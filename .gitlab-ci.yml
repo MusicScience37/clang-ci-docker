@@ -33,6 +33,22 @@ build clang7 master:
   only:
     - master
 
+build clang8:
+  extends: .build-base
+  variables:
+    BUILD_CONTEXT: clang8
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
+  except:
+    - master
+
+build clang8 master:
+  extends: .build-base
+  variables:
+    BUILD_CONTEXT: clang8
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
+  only:
+    - master
+
 build clang9:
   extends: .build-base
   variables:
