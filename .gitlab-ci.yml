@@ -17,6 +17,22 @@
     when: always
     expire_in: '30 days'
 
+build clang7:
+  extends: .build-base
+  variables:
+    BUILD_CONTEXT: clang7
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
+  except:
+    - master
+
+build clang7 master:
+  extends: .build-base
+  variables:
+    BUILD_CONTEXT: clang7
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
+  only:
+    - master
+
 build clang8:
   extends: .build-base
   variables:
