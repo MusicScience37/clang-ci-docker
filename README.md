@@ -8,6 +8,7 @@ The version of Clang is as following:
 
 | Tag of Container | Version of Clang |
 | :--------------- | :--------------- |
+| clang8           | 8.0.1            |
 | clang9           | 9.0.0            |
 
 ## Repositories
