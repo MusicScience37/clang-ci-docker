@@ -2,4 +2,4 @@ sut:
     build: .
     volumes:
       - ../test:/home/test
-    command: /home/test/run_test.sh clang9
+    command: /home/test/run_test.sh clang10
