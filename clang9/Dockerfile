@@ -1,12 +1,12 @@
-FROM registry.gitlab.com/musicscience37_ci/cpp-base-image-docker:v1-1
+FROM registry.gitlab.com/musicscience37_ci/cpp-base-image-docker:v2-0
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        llvm-9-dev=1:9-2 \
-        clang-9=1:9-2 \
-        libomp-9-dev=1:9-2 \
-        clang-format-9=1:9-2 \
-        clang-tidy-9=1:9-2 && \
+        llvm-9-dev=1:9.0.1-12 \
+        clang-9=1:9.0.1-12 \
+        libomp-9-dev=1:9.0.1-12 \
+        clang-format-9=1:9.0.1-12 \
+        clang-tidy-9=1:9.0.1-12 && \
     apt-get autoremove && \
     apt-get autoclean && \
     rm -r /var/lib/apt/lists/* && \
