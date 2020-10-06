@@ -15,7 +15,6 @@ The version of Clang is as following:
 
 | Tag of Container  | Version of Clang |
 | :---------------- | :--------------- |
-| clang7            | 7.0.1            |
 | clang8            | 8.0.1            |
 | clang9 (latest)   | 9.0.1            |
 | clang10 (testing) | 10.0.0           |
