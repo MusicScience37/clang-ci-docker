@@ -13,18 +13,18 @@ Docker container image for CI of C/C++ with Clang compiler
 
 The version of Clang is as following:
 
-| Tag of Container  | Version of Clang |
-| :---------------- | :--------------- |
-| clang8            | 8.0.1            |
-| clang9 (latest)   | 9.0.1            |
-| clang10 (testing) | 10.0.0           |
+| Tag of Container | Version of Clang |
+| :--------------- | :--------------- |
+| clang8           | 8.0.1            |
+| clang9           | 9.0.1            |
+| clang10          | 10.0.0           |
 
 ## Container Registries
 
 You can pull automatically built images from following registries:
 
 - [GitLab Container Registry](https://gitlab.com/musicscience37_ci/clang-ci-docker/container_registry)
-  - latest stable image: `registry.gitlab.com/musicscience37_ci/clnag-ci-docker:clang9`
+  - latest stable image: `registry.gitlab.com/musicscience37_ci/clnag-ci-docker:clang10`
 - [Docker Hub](https://hub.docker.com/r/musicscience37/clang-ci)
   - latest stable image: `docker pull musicscience37/clang-ci`
 
