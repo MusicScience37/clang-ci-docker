@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/musicscience37_ci/cpp-base-image-docker:v2-2
+FROM registry.gitlab.com/musicscience37_ci/cpp-base-image-docker:v3-0
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
