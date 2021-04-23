@@ -64,3 +64,19 @@ build clang10 master:
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
   only:
     - master
+
+build clang11:
+  extends: .build-base
+  variables:
+    BUILD_CONTEXT: clang11
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
+  except:
+    - master
+
+build clang11 master:
+  extends: .build-base
+  variables:
+    BUILD_CONTEXT: clang11
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
+  only:
+    - master

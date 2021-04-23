@@ -18,6 +18,7 @@ The version of Clang is as following:
 | clang8           | 8.0.1            |
 | clang9           | 9.0.1            |
 | clang10          | 10.0.0           |
+| clang11          | 11.0.0           |
 
 ## Container Registries
 
