@@ -37,7 +37,7 @@ build clang8:
     - tags
 
 build clang8 tag:
-  extends: .build-base
+  extends: .build-hub-base
   variables:
     BUILD_CONTEXT: clang8
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
@@ -45,7 +45,7 @@ build clang8 tag:
     - tags
 
 build clang8 master:
-  extends: .build-base
+  extends: .build-hub-base
   variables:
     BUILD_CONTEXT: clang8
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
@@ -62,7 +62,7 @@ build clang9:
     - tags
 
 build clang9 tags:
-  extends: .build-base
+  extends: .build-hub-base
   variables:
     BUILD_CONTEXT: clang9
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
@@ -70,7 +70,7 @@ build clang9 tags:
     - tags
 
 build clang9 master:
-  extends: .build-base
+  extends: .build-hub-base
   variables:
     BUILD_CONTEXT: clang9
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
@@ -87,7 +87,7 @@ build clang10:
     - tags
 
 build clang10 tag:
-  extends: .build-base
+  extends: .build-hub-base
   variables:
     BUILD_CONTEXT: clang10
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
@@ -95,7 +95,7 @@ build clang10 tag:
     - tags
 
 build clang10 master:
-  extends: .build-base
+  extends: .build-hub-base
   variables:
     BUILD_CONTEXT: clang10
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
@@ -112,7 +112,7 @@ build clang11:
     - tags
 
 build clang11 tag:
-  extends: .build-base
+  extends: .build-hub-base
   variables:
     BUILD_CONTEXT: clang11
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
@@ -120,7 +120,7 @@ build clang11 tag:
     - tags
 
 build clang11 master:
-  extends: .build-base
+  extends: .build-hub-base
   variables:
     BUILD_CONTEXT: clang11
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
