@@ -1,3 +1,6 @@
+variables:
+  HUB_REPO_NAME: musicscience37/clang-ci
+
 .build-base:
   image: tmaier/docker-compose:latest
   stage: build
@@ -17,6 +20,13 @@
     when: always
     expire_in: "30 days"
 
+.build-hub-base:
+  extends: .build-base
+  after_script:
+    - docker login -u "$HUB_USER_NAME" -p "$HUB_ACCESS_TOKEN"
+    - docker tag "$IMAGE_NAME" "$HUB_IMAGE_NAME"
+    - docker push "$HUB_IMAGE_NAME"
+
 build clang8:
   extends: .build-base
   variables:
@@ -24,6 +34,15 @@ build clang8:
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
   except:
     - master
+    - tags
+
+build clang8 tag:
+  extends: .build-base
+  variables:
+    BUILD_CONTEXT: clang8
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
+  only:
+    - tags
 
 build clang8 master:
   extends: .build-base
@@ -40,6 +59,15 @@ build clang9:
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
   except:
     - master
+    - tags
+
+build clang9 tags:
+  extends: .build-base
+  variables:
+    BUILD_CONTEXT: clang9
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
+  only:
+    - tags
 
 build clang9 master:
   extends: .build-base
@@ -56,6 +84,15 @@ build clang10:
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
   except:
     - master
+    - tags
+
+build clang10 tag:
+  extends: .build-base
+  variables:
+    BUILD_CONTEXT: clang10
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
+  only:
+    - tags
 
 build clang10 master:
   extends: .build-base
@@ -72,6 +109,15 @@ build clang11:
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
   except:
     - master
+    - tags
+
+build clang11 tag:
+  extends: .build-base
+  variables:
+    BUILD_CONTEXT: clang11
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
+  only:
+    - tags
 
 build clang11 master:
   extends: .build-base

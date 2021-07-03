@@ -1,12 +1,12 @@
-FROM registry.gitlab.com/musicscience37_ci/cpp-base-image-docker:v3-2
+FROM registry.gitlab.com/musicscience37_ci/cpp-base-image-docker:v3-3
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        llvm-11-dev=1:11.0.0-2~ubuntu20.04.1 \
-        clang-11=1:11.0.0-2~ubuntu20.04.1 \
-        libomp-11-dev=1:11.0.0-2~ubuntu20.04.1 \
-        clang-format-11=1:11.0.0-2~ubuntu20.04.1 \
-        clang-tidy-11=1:11.0.0-2~ubuntu20.04.1 && \
+    llvm-11-dev=1:11.0.0-2~ubuntu20.04.1 \
+    clang-11=1:11.0.0-2~ubuntu20.04.1 \
+    libomp-11-dev=1:11.0.0-2~ubuntu20.04.1 \
+    clang-format-11=1:11.0.0-2~ubuntu20.04.1 \
+    clang-tidy-11=1:11.0.0-2~ubuntu20.04.1 && \
     apt-get autoremove && \
     apt-get autoclean && \
     rm -r /var/lib/apt/lists/* && \
