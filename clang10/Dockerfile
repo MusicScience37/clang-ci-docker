@@ -1,9 +1,12 @@
-FROM registry.gitlab.com/musicscience37_ci/cpp-base-image-docker:v3-4
+FROM registry.gitlab.com/musicscience37_ci/cpp-base-image-docker:focal-v4-1
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     llvm-10-dev=1:10.0.0-4ubuntu1 \
     clang-10=1:10.0.0-4ubuntu1 \
+    libclang-10-dev=1:10.0.0-4ubuntu1 \
+    libc++-10-dev=1:10.0.0-4ubuntu1 \
+    libc++abi-10-dev=1:10.0.0-4ubuntu1 \
     libomp-10-dev=1:10.0.0-4ubuntu1 \
     clang-format-10=1:10.0.0-4ubuntu1 \
     clang-tidy-10=1:10.0.0-4ubuntu1 && \
