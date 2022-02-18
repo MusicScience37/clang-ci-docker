@@ -1,15 +1,13 @@
-FROM registry.gitlab.com/musicscience37_ci/cpp-base-image-docker:jammy-v4-1
+FROM registry.gitlab.com/musicscience37_ci/cpp-base-image-docker:focal-v4-1
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    llvm-13-dev=1:13.0.0-9 \
-    clang-13=1:13.0.0-9 \
-    libclang-13-dev=1:13.0.0-9 \
-    libc++-13-dev=1:13.0.0-9 \
-    libc++abi-13-dev=1:13.0.0-9 \
-    libomp-13-dev=1:13.0.0-9 \
-    clang-format-13=1:13.0.0-9 \
-    clang-tidy-13=1:13.0.0-9 && \
+    lsb-release=11.1.0ubuntu2 \
+    software-properties-common=0.99.9.8 \
+    gpg-agent=2.2.19-3ubuntu2.1 && \
+    wget -nv https://apt.llvm.org/llvm.sh && \
+    bash llvm.sh 13 all && \
+    rm llvm.sh && \
     apt-get autoremove && \
     apt-get autoclean && \
     rm -r /var/lib/apt/lists/* && \
