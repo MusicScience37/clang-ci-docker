@@ -1,15 +1,15 @@
-FROM registry.gitlab.com/musicscience37_ci/cpp-base-image-docker:focal-v4-1
+FROM registry.gitlab.com/musicscience37_ci/cpp-base-image-docker:focal-v4-2
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    llvm-12-dev=1:12.0.0-3ubuntu1~20.04.4 \
-    clang-12=1:12.0.0-3ubuntu1~20.04.4 \
-    libclang-12-dev=1:12.0.0-3ubuntu1~20.04.4 \
-    libc++-12-dev=1:12.0.0-3ubuntu1~20.04.4 \
-    libc++abi-12-dev=1:12.0.0-3ubuntu1~20.04.4 \
-    libomp-12-dev=1:12.0.0-3ubuntu1~20.04.4 \
-    clang-format-12=1:12.0.0-3ubuntu1~20.04.4 \
-    clang-tidy-12=1:12.0.0-3ubuntu1~20.04.4 && \
+    llvm-12-dev=1:12.0.0-3ubuntu1~20.04.5 \
+    clang-12=1:12.0.0-3ubuntu1~20.04.5 \
+    libclang-12-dev=1:12.0.0-3ubuntu1~20.04.5 \
+    libc++-12-dev=1:12.0.0-3ubuntu1~20.04.5 \
+    libc++abi-12-dev=1:12.0.0-3ubuntu1~20.04.5 \
+    libomp-12-dev=1:12.0.0-3ubuntu1~20.04.5 \
+    clang-format-12=1:12.0.0-3ubuntu1~20.04.5 \
+    clang-tidy-12=1:12.0.0-3ubuntu1~20.04.5 && \
     apt-get autoremove && \
     apt-get autoclean && \
     rm -r /var/lib/apt/lists/* && \
