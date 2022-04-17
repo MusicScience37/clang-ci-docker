@@ -27,33 +27,6 @@ variables:
     - docker tag "$IMAGE_NAME" "$HUB_IMAGE_NAME"
     - docker push "$HUB_IMAGE_NAME"
 
-build clang10:
-  extends: .build-base
-  variables:
-    BUILD_CONTEXT: clang10
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
-  except:
-    - master
-    - tags
-
-build clang10 tag:
-  extends: .build-hub-base
-  variables:
-    BUILD_CONTEXT: clang10
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
-    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT-$CI_COMMIT_TAG"
-  only:
-    - tags
-
-build clang10 master:
-  extends: .build-hub-base
-  variables:
-    BUILD_CONTEXT: clang10
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
-    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT"
-  only:
-    - master
-
 build clang11:
   extends: .build-base
   variables:
@@ -130,6 +103,33 @@ build clang13 master:
   extends: .build-hub-base
   variables:
     BUILD_CONTEXT: clang13
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
+    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT"
+  only:
+    - master
+
+build clang14:
+  extends: .build-base
+  variables:
+    BUILD_CONTEXT: clang14
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
+  except:
+    - master
+    - tags
+
+build clang14 tag:
+  extends: .build-hub-base
+  variables:
+    BUILD_CONTEXT: clang14
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
+    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT-$CI_COMMIT_TAG"
+  only:
+    - tags
+
+build clang14 master:
+  extends: .build-hub-base
+  variables:
+    BUILD_CONTEXT: clang14
     IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
     HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT"
   only:

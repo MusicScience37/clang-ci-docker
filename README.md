@@ -15,10 +15,10 @@ The version of Clang is as following:
 
 | Tag of Container | Version of Clang |
 | :--------------- | :--------------- |
-| clang8           | 8.0.1            |
-| clang9           | 9.0.1            |
-| clang10          | 10.0.0           |
 | clang11          | 11.0.0           |
+| clang12          | 12.0.0           |
+| clang13          | 13.0.1           |
+| clang14          | 14.0.1           |
 
 ## Container Registries
 
