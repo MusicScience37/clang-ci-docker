@@ -1,6 +1,6 @@
 # clang-ci-docker
 
-[![dockeri.co](https://dockeri.co/image/musicscience37/gcc-ci)](https://hub.docker.com/r/musicscience37/clang-ci)
+[![dockeri.co](https://dockeri.co/image/musicscience37/clang-ci)](https://hub.docker.com/r/musicscience37/clang-ci)
 
 ![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/musicscience37/clang-ci)
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/musicscience37/clang-ci)
@@ -34,7 +34,7 @@ You can pull automatically built images from following registries:
 - [GitLab](https://gitlab.com/musicscience37_ci/clang-ci-docker):
   for development including CI
 - [Github](https://github.com/MusicScience37/clang-ci-docker):
-  mirror repository for use in Docker Hub
+  mirror repository
 
 ## Test
 
