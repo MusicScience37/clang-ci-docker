@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/musicscience37_ci/cpp-base-image-docker:focal-v4-3
+FROM registry.gitlab.com/musicscience37/cpp-base-image-docker:focal-v5-0
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
