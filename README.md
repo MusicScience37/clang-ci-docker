@@ -1,13 +1,10 @@
 # clang-ci-docker
 
-[![dockeri.co](https://dockeri.co/image/musicscience37/gcc-ci)](https://hub.docker.com/r/musicscience37/clang-ci)
-
-![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/musicscience37/clang-ci)
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/musicscience37/clang-ci)
+[![dockeri.co](https://dockeri.co/image/musicscience37/clang-ci)](https://hub.docker.com/r/musicscience37/clang-ci)
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/MusicScience37/clang-ci-docker?label=latest)
 
-[![pipeline status](https://gitlab.com/musicscience37_ci/clang-ci-docker/badges/develop/pipeline.svg)](https://gitlab.com/musicscience37_ci/clang-ci-docker/commits/develop)
+[![pipeline status](https://gitlab.com/musicscience37/clang-ci-docker/badges/develop/pipeline.svg)](https://gitlab.com/musicscience37/clang-ci-docker/commits/develop)
 
 Docker container image for CI of C/C++ with Clang compiler
 
@@ -18,23 +15,23 @@ The version of Clang is as following:
 | clang11          | 11.0.0           |
 | clang12          | 12.0.0           |
 | clang13          | 13.0.1           |
-| clang14          | 14.0.1           |
+| clang14          | 14.0.4           |
 
 ## Container Registries
 
 You can pull automatically built images from following registries:
 
-- [GitLab Container Registry](https://gitlab.com/musicscience37_ci/clang-ci-docker/container_registry)
-  - latest stable image: `registry.gitlab.com/musicscience37_ci/clnag-ci-docker:clang10`
+- [GitLab Container Registry](https://gitlab.com/musicscience37/clang-ci-docker/container_registry)
+  - latest stable image: `registry.gitlab.com/musicscience37/clnag-ci-docker:clang10`
 - [Docker Hub](https://hub.docker.com/r/musicscience37/clang-ci)
   - latest stable image: `docker pull musicscience37/clang-ci`
 
 ## Repositories
 
-- [GitLab](https://gitlab.com/musicscience37_ci/clang-ci-docker):
+- [GitLab](https://gitlab.com/musicscience37/clang-ci-docker):
   for development including CI
 - [Github](https://github.com/MusicScience37/clang-ci-docker):
-  mirror repository for use in Docker Hub
+  mirror repository
 
 ## Test
 
