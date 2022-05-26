@@ -16,6 +16,7 @@ The version of Clang is as following:
 | clang12          | 12.0.0           |
 | clang13          | 13.0.1           |
 | clang14          | 14.0.4           |
+| clang15          | 15.0.0           |
 
 ## Container Registries
 
