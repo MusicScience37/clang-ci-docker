@@ -134,3 +134,30 @@ build clang14 master:
     HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT"
   only:
     - master
+
+build clang15:
+  extends: .build-base
+  variables:
+    BUILD_CONTEXT: clang15
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
+  except:
+    - master
+    - tags
+
+build clang15 tag:
+  extends: .build-hub-base
+  variables:
+    BUILD_CONTEXT: clang15
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
+    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT-$CI_COMMIT_TAG"
+  only:
+    - tags
+
+build clang15 master:
+  extends: .build-hub-base
+  variables:
+    BUILD_CONTEXT: clang15
+    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
+    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT"
+  only:
+    - master
