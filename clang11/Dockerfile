@@ -1,15 +1,15 @@
-FROM registry.gitlab.com/musicscience37/cpp-base-image-docker:focal-v5-0
+FROM registry.gitlab.com/musicscience37/cpp-base-image-docker:focal
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    llvm-11-dev=1:11.0.0-2~ubuntu20.04.1 \
-    clang-11=1:11.0.0-2~ubuntu20.04.1 \
-    libclang-11-dev=1:11.0.0-2~ubuntu20.04.1 \
-    libc++-11-dev=1:11.0.0-2~ubuntu20.04.1 \
-    libc++abi-11-dev=1:11.0.0-2~ubuntu20.04.1 \
-    libomp-11-dev=1:11.0.0-2~ubuntu20.04.1 \
-    clang-format-11=1:11.0.0-2~ubuntu20.04.1 \
-    clang-tidy-11=1:11.0.0-2~ubuntu20.04.1 && \
+    llvm-11-dev \
+    clang-11 \
+    libclang-11-dev \
+    libc++-11-dev \
+    libc++abi-11-dev \
+    libomp-11-dev \
+    clang-format-11 \
+    clang-tidy-11 && \
     apt-get autoremove && \
     apt-get autoclean && \
     rm -r /var/lib/apt/lists/* && \

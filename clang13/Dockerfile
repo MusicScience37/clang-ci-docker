@@ -1,10 +1,10 @@
-FROM registry.gitlab.com/musicscience37/cpp-base-image-docker:focal-v5-0
+FROM registry.gitlab.com/musicscience37/cpp-base-image-docker:focal
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    lsb-release=11.1.0ubuntu2 \
-    software-properties-common=0.99.9.8 \
-    gpg-agent=2.2.19-3ubuntu2.1 && \
+    lsb-release \
+    software-properties-common \
+    gpg-agent && \
     wget -nv https://apt.llvm.org/llvm.sh && \
     bash llvm.sh 13 all && \
     rm llvm.sh && \
