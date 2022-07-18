@@ -1,163 +1,90 @@
-variables:
-  HUB_REPO_NAME: musicscience37/clang-ci
+stages:
+  - build
+  - test
 
-.build-base:
-  image: tmaier/docker-compose:latest
+include:
+  - template: Security/Container-Scanning.gitlab-ci.yml
+container_scanning:
+  variables:
+    DOCKER_IMAGE: $CI_REGISTRY_IMAGE
+  rules:
+    - if: $CI_COMMIT_BRANCH &&
+        $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  needs:
+    - "update clang11"
+    - "update clang12"
+    - "update clang13"
+    - "update clang14"
+    - "update clang15"
+
+.test-base:
+  image: docker:latest
   stage: build
   services:
     - docker:dind
   before_script:
-    - docker info
-    - docker-compose --version
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - apk add python3 py3-pip
+    - pip3 install click
   script:
-    - docker build --pull -t "$IMAGE_NAME" "$BUILD_CONTEXT"
-    - sh run_test.sh "$BUILD_CONTEXT"
-    - docker push "$IMAGE_NAME"
-  artifacts:
-    paths:
-      - test/build_$BUILD_CONTEXT
-    when: always
-    expire_in: "30 days"
-
-.build-hub-base:
-  extends: .build-base
-  after_script:
-    - docker login -u "$HUB_USER_NAME" -p "$HUB_ACCESS_TOKEN"
-    - docker tag "$IMAGE_NAME" "$HUB_IMAGE_NAME"
-    - docker push "$HUB_IMAGE_NAME"
-
-build clang11:
-  extends: .build-base
-  variables:
-    BUILD_CONTEXT: clang11
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
+    - apk add python3 py3-pip
+    - python3 ./tool.py test $IMAGE_DIR
   except:
-    - master
-    - tags
+    - main
 
-build clang11 tag:
-  extends: .build-hub-base
-  variables:
-    BUILD_CONTEXT: clang11
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
-    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT-$CI_COMMIT_TAG"
+.update-base:
+  extends: .test-base
+  script:
+    - python3 ./tool.py update $IMAGE_DIR
+  except: []
   only:
-    - tags
+    - main
 
-build clang11 master:
-  extends: .build-hub-base
+test clang11:
+  extends: .test-base
   variables:
-    BUILD_CONTEXT: clang11
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
-    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT"
-  only:
-    - master
+    IMAGE_DIR: clang11
 
-build clang12:
-  extends: .build-base
+update clang11:
+  extends: .update-base
   variables:
-    BUILD_CONTEXT: clang12
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
-  except:
-    - master
-    - tags
+    IMAGE_DIR: clang11
 
-build clang12 tag:
-  extends: .build-hub-base
+test clang12:
+  extends: .test-base
   variables:
-    BUILD_CONTEXT: clang12
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
-    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT-$CI_COMMIT_TAG"
-  only:
-    - tags
+    IMAGE_DIR: clang12
 
-build clang12 master:
-  extends: .build-hub-base
+update clang12:
+  extends: .update-base
   variables:
-    BUILD_CONTEXT: clang12
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
-    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT"
-  only:
-    - master
+    IMAGE_DIR: clang12
 
-build clang13:
-  extends: .build-base
+test clang13:
+  extends: .test-base
   variables:
-    BUILD_CONTEXT: clang13
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
-  except:
-    - master
-    - tags
+    IMAGE_DIR: clang13
 
-build clang13 tags:
-  extends: .build-hub-base
+update clang13:
+  extends: .update-base
   variables:
-    BUILD_CONTEXT: clang13
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
-    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT-$CI_COMMIT_TAG"
-  only:
-    - tags
+    IMAGE_DIR: clang13
 
-build clang13 master:
-  extends: .build-hub-base
+test clang14:
+  extends: .test-base
   variables:
-    BUILD_CONTEXT: clang13
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
-    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT"
-  only:
-    - master
+    IMAGE_DIR: clang14
 
-build clang14:
-  extends: .build-base
+update clang14:
+  extends: .update-base
   variables:
-    BUILD_CONTEXT: clang14
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
-  except:
-    - master
-    - tags
+    IMAGE_DIR: clang14
 
-build clang14 tag:
-  extends: .build-hub-base
+test clang15:
+  extends: .test-base
   variables:
-    BUILD_CONTEXT: clang14
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
-    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT-$CI_COMMIT_TAG"
-  only:
-    - tags
+    IMAGE_DIR: clang15
 
-build clang14 master:
-  extends: .build-hub-base
+update clang15:
+  extends: .update-base
   variables:
-    BUILD_CONTEXT: clang14
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
-    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT"
-  only:
-    - master
-
-build clang15:
-  extends: .build-base
-  variables:
-    BUILD_CONTEXT: clang15
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_REF_SLUG"
-  except:
-    - master
-    - tags
-
-build clang15 tag:
-  extends: .build-hub-base
-  variables:
-    BUILD_CONTEXT: clang15
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT-$CI_COMMIT_TAG"
-    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT-$CI_COMMIT_TAG"
-  only:
-    - tags
-
-build clang15 master:
-  extends: .build-hub-base
-  variables:
-    BUILD_CONTEXT: clang15
-    IMAGE_NAME: "$CI_REGISTRY_IMAGE:$BUILD_CONTEXT"
-    HUB_IMAGE_NAME: "$HUB_REPO_NAME:$BUILD_CONTEXT"
-  only:
-    - master
+    IMAGE_DIR: clang15

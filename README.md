@@ -2,21 +2,17 @@
 
 [![dockeri.co](https://dockeri.co/image/musicscience37/clang-ci)](https://hub.docker.com/r/musicscience37/clang-ci)
 
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/MusicScience37/clang-ci-docker?label=latest)
-
-[![pipeline status](https://gitlab.com/musicscience37/clang-ci-docker/badges/develop/pipeline.svg)](https://gitlab.com/musicscience37/clang-ci-docker/commits/develop)
+[![pipeline status](https://gitlab.com/MusicScience37/clang-ci-docker/badges/main/pipeline.svg)](https://gitlab.com/MusicScience37/clang-ci-docker/-/commits/main)
 
 Docker container image for CI of C/C++ with Clang compiler
 
 The version of Clang is as following:
 
-| Tag of Container | Version of Clang |
-| :--------------- | :--------------- |
-| clang11          | 11.0.0           |
-| clang12          | 12.0.0           |
-| clang13          | 13.0.1           |
-| clang14          | 14.0.4           |
-| clang15          | 15.0.0           |
+- clang11
+- clang12
+- clang13
+- clang14
+- clang15
 
 ## Container Registries
 
@@ -34,7 +30,7 @@ You can pull automatically built images from following registries:
 - [Github](https://github.com/MusicScience37/clang-ci-docker):
   mirror repository
 
-## Test
+## Testing
 
-To run a test of this project, execute the `run_test.sh` script.
-It requires docker and docker-compose commands installed.
+For test of this project,
+use `./tool.py test` command.
