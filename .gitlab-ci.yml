@@ -15,7 +15,6 @@ container_scanning:
     - "update clang12"
     - "update clang13"
     - "update clang14"
-    - "update clang15"
 
 .test-base:
   image: docker:latest
@@ -83,8 +82,10 @@ test clang15:
   extends: .test-base
   variables:
     IMAGE_DIR: clang15
+  allow_failure: true
 
 update clang15:
   extends: .update-base
   variables:
     IMAGE_DIR: clang15
+  allow_failure: true
