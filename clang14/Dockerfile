@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/musicscience37/cpp-base-image-docker:focal
+FROM registry.gitlab.com/musicscience37/cpp-base-image-docker:jammy
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
