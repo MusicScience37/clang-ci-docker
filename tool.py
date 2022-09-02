@@ -37,7 +37,14 @@ THIS_DIR = os.path.dirname(os.path.realpath(__file__))
 GITLAB_IMAGE_URL = "registry.gitlab.com/musicscience37/clang-ci-docker"
 DOCKER_HUB_IMAGE_URL = "musicscience37/clang-ci"
 
-IMAGE_TAGS = ["clang11", "clang12", "clang13", "clang14", "clang15"]
+IMAGE_TAGS = [
+    "clang11",
+    "clang12",
+    "clang13",
+    "clang14",
+    "clang15",
+    "clang16",
+]
 LATEST_IMAGE_TAG = IMAGE_TAGS[3]
 
 
@@ -174,7 +181,7 @@ def test(dir_name: str):
 @cli.command()
 @click.argument("dir_name", type=click.Choice(IMAGE_TAGS))
 def update(dir_name: str):
-    """Build and test Docker image."""
+    """Build, test, and update Docker image."""
 
     image_full_name = f"{GITLAB_IMAGE_URL}:{dir_name}"
     _build(dir_name=dir_name, image_full_name=image_full_name)
