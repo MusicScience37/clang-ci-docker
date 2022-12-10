@@ -34,7 +34,7 @@ import click
 
 THIS_DIR = os.path.dirname(os.path.realpath(__file__))
 
-GITLAB_IMAGE_URL = "registry.gitlab.com/musicscience37/clang-ci-docker"
+GITLAB_IMAGE_URL = "registry.gitlab.com/musicscience37projects/docker/clang-ci-docker"
 DOCKER_HUB_IMAGE_URL = "musicscience37/clang-ci"
 
 IMAGE_TAGS = [
