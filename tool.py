@@ -27,6 +27,7 @@
 """
 
 import datetime
+import dataclasses
 import os
 import subprocess
 
@@ -37,15 +38,53 @@ THIS_DIR = os.path.dirname(os.path.realpath(__file__))
 GITLAB_IMAGE_URL = "registry.gitlab.com/musicscience37projects/docker/clang-ci-docker"
 DOCKER_HUB_IMAGE_URL = "musicscience37/clang-ci"
 
-IMAGE_TAGS = [
-    "clang11",
-    "clang12",
-    "clang13",
-    "clang14",
-    "clang15",
-    "clang16",
+
+@dataclasses.dataclass
+class Image:
+    tag: str
+    ubuntu_version: str
+    llvm_version: int
+    dockerfile_type: str
+
+
+def create_image(llvm_version: int, ubuntu_version: str, dockerfile_type: str) -> Image:
+    return Image(
+        tag=f"clang{llvm_version}",
+        ubuntu_version=ubuntu_version,
+        llvm_version=llvm_version,
+        dockerfile_type=dockerfile_type,
+    )
+
+
+IMAGE_LIST = [
+    create_image(
+        llvm_version=11, ubuntu_version="focal", dockerfile_type="llvm_in_ubuntu"
+    ),
+    create_image(
+        llvm_version=12, ubuntu_version="focal", dockerfile_type="llvm_in_ubuntu"
+    ),
+    create_image(
+        llvm_version=13, ubuntu_version="jammy", dockerfile_type="llvm_in_ubuntu"
+    ),
+    create_image(
+        llvm_version=14, ubuntu_version="kinetic", dockerfile_type="llvm_in_ubuntu"
+    ),
+    create_image(
+        llvm_version=15, ubuntu_version="kinetic", dockerfile_type="llvm_in_official"
+    ),
+    create_image(
+        llvm_version=16, ubuntu_version="kinetic", dockerfile_type="llvm_in_official"
+    ),
+    create_image(
+        llvm_version=17, ubuntu_version="kinetic", dockerfile_type="llvm_in_official"
+    ),
 ]
-LATEST_IMAGE_TAG = IMAGE_TAGS[3]
+
+IMAGE_MAP = {image.tag: image for image in IMAGE_LIST}
+
+
+IMAGE_TAGS = [image.tag for image in IMAGE_LIST]
+LATEST_IMAGE_TAG = "clang14"
 
 
 @click.group()
@@ -74,22 +113,34 @@ def _create_time_stamp() -> str:
     return datetime.datetime.now().strftime("%Y%m%d")
 
 
-def _build(dir_name: str, image_full_name: str):
+def _build(image: Image, image_full_name: str):
     """Build Docker image.
 
     Args:
-        dir_name (str): Directory name of Dockerfile.
+        image (Image): Information of the image.
         image_full_name (str): Full name of the image.
     """
 
-    _run_command(["docker", "build", "-t", image_full_name, dir_name])
+    _run_command(
+        [
+            "docker",
+            "build",
+            "-t",
+            image_full_name,
+            "--build-arg",
+            f"UBUNTU_VERSION={image.ubuntu_version}",
+            "--build-arg",
+            f"LLVM_VERSION={image.llvm_version}",
+            image.dockerfile_type,
+        ]
+    )
 
 
-def _test(dir_name: str, image_full_name: str):
+def _test(image: Image, image_full_name: str):
     """Test Docker image.
 
     Args:
-        dir_name (str): Directory name of Dockerfile.
+        image (Image): Information of the image.
         image_full_name (str): Full name of the image.
     """
 
@@ -102,22 +153,21 @@ def _test(dir_name: str, image_full_name: str):
             f"{THIS_DIR}/test:/home/test",
             image_full_name,
             "/home/test/run_test.sh",
-            dir_name,
+            image.tag,
         ]
     )
 
 
 def _tag_and_upload(image_full_name: str, another_image_full_name: str):
-
     _run_command(["docker", "tag", image_full_name, another_image_full_name])
     _run_command(["docker", "push", another_image_full_name])
 
 
-def _upload(dir_name: str, image_full_name: str):
+def _upload(tag: str, image_full_name: str):
     """Upload Docker image.
 
     Args:
-        dir_name (str): Directory name of Dockerfile.
+        tag (str): Tag of the image.
         image_full_name (str): Full name of the image.
     """
 
@@ -135,9 +185,9 @@ def _upload(dir_name: str, image_full_name: str):
     _run_command(["docker", "push", image_full_name])
     _tag_and_upload(
         image_full_name=image_full_name,
-        another_image_full_name=f"{GITLAB_IMAGE_URL}:{dir_name}-{_create_time_stamp()}",
+        another_image_full_name=f"{GITLAB_IMAGE_URL}:{tag}-{_create_time_stamp()}",
     )
-    if dir_name == LATEST_IMAGE_TAG:
+    if tag == LATEST_IMAGE_TAG:
         _tag_and_upload(
             image_full_name=image_full_name,
             another_image_full_name=f"{GITLAB_IMAGE_URL}:latest",
@@ -155,9 +205,9 @@ def _upload(dir_name: str, image_full_name: str):
     )
     _tag_and_upload(
         image_full_name=image_full_name,
-        another_image_full_name=f"{DOCKER_HUB_IMAGE_URL}:{dir_name}",
+        another_image_full_name=f"{DOCKER_HUB_IMAGE_URL}:{tag}",
     )
-    if dir_name == LATEST_IMAGE_TAG:
+    if tag == LATEST_IMAGE_TAG:
         _tag_and_upload(
             image_full_name=image_full_name,
             another_image_full_name=f"{DOCKER_HUB_IMAGE_URL}:latest",
@@ -165,24 +215,26 @@ def _upload(dir_name: str, image_full_name: str):
 
 
 @cli.command()
-@click.argument("dir_name", type=click.Choice(IMAGE_TAGS))
-def test(dir_name: str):
+@click.argument("tag", type=click.Choice(IMAGE_TAGS))
+def test(tag: str):
     """Build and test Docker image."""
 
-    image_full_name = f"{GITLAB_IMAGE_URL}:{dir_name}-test"
-    _build(dir_name=dir_name, image_full_name=image_full_name)
-    _test(dir_name=dir_name, image_full_name=image_full_name)
+    image = IMAGE_MAP[tag]
+    image_full_name = f"{GITLAB_IMAGE_URL}:{tag}-test"
+    _build(image=image, image_full_name=image_full_name)
+    _test(image=image, image_full_name=image_full_name)
 
 
 @cli.command()
-@click.argument("dir_name", type=click.Choice(IMAGE_TAGS))
-def update(dir_name: str):
+@click.argument("tag", type=click.Choice(IMAGE_TAGS))
+def update(tag: str):
     """Build, test, and update Docker image."""
 
-    image_full_name = f"{GITLAB_IMAGE_URL}:{dir_name}"
-    _build(dir_name=dir_name, image_full_name=image_full_name)
-    _test(dir_name=dir_name, image_full_name=image_full_name)
-    _upload(dir_name=dir_name, image_full_name=image_full_name)
+    image = IMAGE_MAP[tag]
+    image_full_name = f"{GITLAB_IMAGE_URL}:{tag}"
+    _build(image=image, image_full_name=image_full_name)
+    _test(image=image, image_full_name=image_full_name)
+    _upload(tag=tag, image_full_name=image_full_name)
 
 
 if __name__ == "__main__":
