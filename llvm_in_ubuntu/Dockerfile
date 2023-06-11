@@ -4,7 +4,7 @@ FROM registry.gitlab.com/musicscience37projects/docker/cpp-base-image-docker:${U
 
 ARG LLVM_VERSION
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y \
     llvm-${LLVM_VERSION}-dev \
     clang-${LLVM_VERSION} \
     clangd-${LLVM_VERSION} \
@@ -13,7 +13,8 @@ RUN apt-get update && \
     libc++abi-${LLVM_VERSION}-dev \
     libomp-${LLVM_VERSION}-dev \
     clang-format-${LLVM_VERSION} \
-    clang-tidy-${LLVM_VERSION} && \
+    clang-tidy-${LLVM_VERSION} \
+    && \
     apt-get autoremove && \
     apt-get autoclean && \
     rm -r /var/lib/apt/lists/* && \
