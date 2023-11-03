@@ -87,7 +87,7 @@ IMAGE_MAP = {image.tag: image for image in IMAGE_LIST}
 
 
 IMAGE_TAGS = [image.tag for image in IMAGE_LIST]
-LATEST_IMAGE_TAG = "clang14"
+LATEST_IMAGE_TAG = "clang16"
 
 
 @click.group()
