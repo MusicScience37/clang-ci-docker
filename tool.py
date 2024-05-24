@@ -61,19 +61,19 @@ IMAGE_LIST = [
         llvm_version=13, ubuntu_version="jammy", dockerfile_type="llvm_in_ubuntu"
     ),
     create_image(
-        llvm_version=14, ubuntu_version="mantic", dockerfile_type="llvm_in_ubuntu"
+        llvm_version=14, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
     ),
     create_image(
-        llvm_version=15, ubuntu_version="mantic", dockerfile_type="llvm_in_ubuntu"
+        llvm_version=15, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
     ),
     create_image(
-        llvm_version=16, ubuntu_version="mantic", dockerfile_type="llvm_in_ubuntu"
+        llvm_version=16, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
     ),
     create_image(
-        llvm_version=17, ubuntu_version="mantic", dockerfile_type="llvm_in_ubuntu"
+        llvm_version=17, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
     ),
     create_image(
-        llvm_version=18, ubuntu_version="mantic", dockerfile_type="llvm_in_official"
+        llvm_version=18, ubuntu_version="noble", dockerfile_type="llvm_in_official"
     ),
 ]
 
