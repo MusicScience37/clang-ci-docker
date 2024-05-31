@@ -29,6 +29,14 @@ test:
   script:
     - poetry run python3 ./tool.py test $IMAGE_TAG
 
+experimental test:
+  extends: test
+  parallel:
+    matrix:
+      - IMAGE_TAG:
+          - clang19
+  allow_failure: true
+
 update:
   extends: test
   rules:
@@ -36,3 +44,11 @@ update:
         $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   script:
     - poetry run python3 ./tool.py update $IMAGE_TAG
+
+experimental update:
+  extends: update
+  parallel:
+    matrix:
+      - IMAGE_TAG:
+          - clang19
+  allow_failure: true
