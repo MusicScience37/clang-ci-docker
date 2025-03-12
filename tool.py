@@ -23,8 +23,7 @@
 # SOFTWARE.
 #
 
-"""Tool to create and test Docker image.
-"""
+"""Tool to create and test Docker image."""
 
 import datetime
 import dataclasses
@@ -76,7 +75,7 @@ IMAGE_LIST = [
         llvm_version=18, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
     ),
     create_image(
-        llvm_version=19, ubuntu_version="noble", dockerfile_type="llvm_in_official"
+        llvm_version=19, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
     ),
     create_image(
         llvm_version=20, ubuntu_version="noble", dockerfile_type="llvm_in_official"
