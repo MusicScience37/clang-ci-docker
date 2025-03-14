@@ -75,7 +75,7 @@ IMAGE_LIST = [
         llvm_version=18, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
     ),
     create_image(
-        llvm_version=19, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
+        llvm_version=19, ubuntu_version="noble", dockerfile_type="llvm_in_official"
     ),
     create_image(
         llvm_version=20, ubuntu_version="noble", dockerfile_type="llvm_in_official"
