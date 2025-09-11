@@ -77,6 +77,9 @@ IMAGE_LIST = [
     create_image(
         llvm_version=21, ubuntu_version="noble", dockerfile_type="llvm_in_official"
     ),
+    create_image(
+        llvm_version=22, ubuntu_version="noble", dockerfile_type="llvm_in_official"
+    ),
 ]
 
 IMAGE_MAP = {image.tag: image for image in IMAGE_LIST}
