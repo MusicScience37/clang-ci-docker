@@ -8,14 +8,12 @@ Docker container image for CI of C/C++ with Clang compiler
 
 The version of Clang is as following:
 
-- clang15
-- clang16
-- clang17
 - clang18
 - clang19
 - clang20
 - clang21
 - clang22
+- clang23
 
 ## Container Registries
 
