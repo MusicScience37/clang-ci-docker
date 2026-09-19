@@ -57,15 +57,6 @@ def create_image(llvm_version: int, ubuntu_version: str, dockerfile_type: str) -
 
 IMAGE_LIST = [
     create_image(
-        llvm_version=15, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
-    ),
-    create_image(
-        llvm_version=16, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
-    ),
-    create_image(
-        llvm_version=17, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
-    ),
-    create_image(
         llvm_version=18, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
     ),
     create_image(
