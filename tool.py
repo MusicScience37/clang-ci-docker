@@ -57,15 +57,6 @@ def create_image(llvm_version: int, ubuntu_version: str, dockerfile_type: str) -
 
 IMAGE_LIST = [
     create_image(
-        llvm_version=15, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
-    ),
-    create_image(
-        llvm_version=16, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
-    ),
-    create_image(
-        llvm_version=17, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
-    ),
-    create_image(
         llvm_version=18, ubuntu_version="noble", dockerfile_type="llvm_in_ubuntu"
     ),
     create_image(
@@ -80,13 +71,16 @@ IMAGE_LIST = [
     create_image(
         llvm_version=22, ubuntu_version="resolute", dockerfile_type="llvm_in_ubuntu"
     ),
+    create_image(
+        llvm_version=23, ubuntu_version="resolute", dockerfile_type="llvm_in_official"
+    ),
 ]
 
 IMAGE_MAP = {image.tag: image for image in IMAGE_LIST}
 
 
 IMAGE_TAGS = [image.tag for image in IMAGE_LIST]
-LATEST_IMAGE_TAG = "clang21"
+LATEST_IMAGE_TAG = "clang22"
 
 
 @click.group()
