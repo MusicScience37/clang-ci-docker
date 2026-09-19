@@ -80,13 +80,16 @@ IMAGE_LIST = [
     create_image(
         llvm_version=22, ubuntu_version="resolute", dockerfile_type="llvm_in_ubuntu"
     ),
+    create_image(
+        llvm_version=23, ubuntu_version="resolute", dockerfile_type="llvm_in_official"
+    ),
 ]
 
 IMAGE_MAP = {image.tag: image for image in IMAGE_LIST}
 
 
 IMAGE_TAGS = [image.tag for image in IMAGE_LIST]
-LATEST_IMAGE_TAG = "clang21"
+LATEST_IMAGE_TAG = "clang22"
 
 
 @click.group()
